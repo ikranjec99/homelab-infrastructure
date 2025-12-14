@@ -4,24 +4,6 @@
 > **⚠️ NOTE** – All commands below are meant to be run on a **root shell** inside the Proxmox VE host.  
 ---
 
-## Table of Contents
-
-| Section | What you’ll learn |
-|---------|------|
-| [Prerequisites](#prerequisites) | What you need before you start |
-| [Step 1 – Create the VM](#step-1-create-the-vm) | One‑liner script that pulls a Debian 13 template, installs the OS and sets up a few basics |
-| [Step 2 – Enable SSH](#step-2-enable-ssh) | Install the OpenSSH server, unlock root login and enable password auth |
-| [Step 3 – Resize the boot disk](#step-3-resize-the-boot-disk) | Expand the first partition to the full size of the VM disk |
-| [Step 4 – Guest Agent](#step-4-guest-agent) | Install `qemu‑guest‑agent` so Proxmox can monitor the VM |
-| [Step 5 – Set a hostname](#step-5-set-a-hostname) | Pick a friendly name for the machine |
-| [Step 6 – Install Docker](#step-6-install-docker) | Grab Docker CE from the official convenience script |
-| [Step 7 – Add Dockge](#step-7-add-dockge) | Spin up the Dockge web UI for easy Docker‑Compose management |
-| [Step 8 – Set a static IP](#step-8-set-a-static-ip) | Edit the Netplan config so the VM no longer uses DHCP |
-| [Troubleshooting](#troubleshooting) | Quick fixes for the most common problems |
-| [License & Acknowledgements](#license--acknowledgements) | Who owns this code, who helped |
-
----
-
 ## Prerequisites
 
 | Item | Why it matters | How to get it |
