@@ -49,13 +49,18 @@ Security note – Enabling password authentication is convenient for a quick sta
 ## Step 3 - Resize the boot disk
 
 The script creates a small default partition that can be too small for your workloads.
-The above command expands the partition to the full size of the VM’s virtual disk.
+Fix is here.
 
 ```bash
-# Resize the first partition
-parted /dev/sda
-resizepart 1
-quit
+# Install cloud-guest-utils (for growpart)
+apt update
+apt install -y cloud-guest-utils e2fsprogs
+
+# Grow the partition
+growpart /dev/sda 1
+
+# Grow the filesystem
+resize2fs /dev/sda1
 ```
 
 ## Step 4 – Guest Agent
