@@ -119,18 +119,20 @@ Replace the entire file with:
 
 ```yaml
 network:
-  version: 2
-  renderer: networkd
-  ethernets:
-    ens18:
-      dhcp4: no
-      addresses: [192.168.1.42/24]
-      routes:
-        - to: default
-          via: 192.168.1.1
-      nameservers:
-        addresses: [192.168.1.1,8.8.8.8]
-        search: []
+    version: 2
+    renderer: networkd
+    ethernets:
+      ens18:
+        dhcp4: no
+        addresses: [x.x.x.x/24] # IP address we want for this VM should be set here, for example 192.168.0.120/24
+        routes:
+          - to: default
+            via: x.x.x.x # 192.168.1.1
+        nameservers:
+          addresses:
+            - 1.1.1.1
+            - 8.8.8.8
+          search: []
 ```
 
 Remember
