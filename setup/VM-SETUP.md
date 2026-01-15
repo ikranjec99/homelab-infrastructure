@@ -127,7 +127,7 @@ network:
         addresses: [x.x.x.x/24] # IP address we want for this VM should be set here, for example 192.168.0.120/24
         routes:
           - to: default
-            via: x.x.x.x # 192.168.1.1
+            via: x.x.x.x # 192.168.0.1
         nameservers:
           addresses:
             - 1.1.1.1
