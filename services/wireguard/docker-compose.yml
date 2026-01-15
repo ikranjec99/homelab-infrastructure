@@ -1,0 +1,19 @@
+services:
+  wgdashboard:
+    image: donaldzou/wgdashboard:latest
+    restart: unless-stopped
+    container_name: wireguard-dashboard
+    environment:
+      - tz=Asia/Kolkata  # Change to your time zone if necessary
+    ports:
+      - 10086:10086/tcp  # Dashboard web UI access
+      - 51820:51820/udp  # WireGuard port
+    volumes:
+      - conf:/etc/wireguard  # Mount configuration folder for WireGuard
+      - data:/data  # Mount data folder
+    cap_add:
+      - NET_ADMIN  # Allow network administration permissions for WireGuard
+
+volumes:
+  conf:
+  data:
