@@ -4,11 +4,13 @@ services:
     container_name: opengist
     restart: unless-stopped
     ports:
-      - 6157:6157 # HTTP port
+      - "${OPENGIST_HTTP_PORT:-6157}:6157"
     volumes:
-      - $HOME/.opengist:/opengist
+      - ${OPENGIST_DATA_DIR:-./data}:/opengist
     environment:
-      OG_LOG_LEVEL: error
+      OG_LOG_LEVEL: ${OPENGIST_LOG_LEVEL:-error}
+    networks:
+      - homelab
 
 networks:
   homelab:

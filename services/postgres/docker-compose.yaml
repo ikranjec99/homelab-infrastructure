@@ -1,20 +1,21 @@
-# Use postgres/example user/password credentials
 services:
   db:
     image: postgres:18.4
+    container_name: postgres
     restart: always
     shm_size: 512mb
     environment:
-      PGDATA: /var/lib/postgresql/18/docker
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      PGPORT: ${PGPORT}
+      PGDATA: ${POSTGRES_PGDATA:-/var/lib/postgresql/18/docker}
+      POSTGRES_DB: ${POSTGRES_DB:-homelab}
+      POSTGRES_USER: ${POSTGRES_USER:-homelab}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env before starting Postgres}
+      PGPORT: ${POSTGRES_CONTAINER_PORT:-5432}
     ports:
-      - 5400:5400
+      - "${POSTGRES_HOST_PORT:-5400}:${POSTGRES_CONTAINER_PORT:-5432}"
     networks:
       - homelab
     volumes:
-      - pgdata:/var/lib/postgresql
+      - pgdata:${POSTGRES_DATA_DIR:-/var/lib/postgresql}
 
 volumes:
   pgdata:

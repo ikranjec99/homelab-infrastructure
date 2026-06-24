@@ -1,4 +1,4 @@
-## Static IP setup
+## Configure a static IP
 
 Edit the Netplan config so the VM stops using DHCP and gets a fixed address.
 
@@ -11,36 +11,38 @@ Replace the entire file with:
 
 ```yaml
 network:
-    version: 2
-    renderer: networkd
-    ethernets:
-      ens18:
-        dhcp4: no
-        addresses: [x.x.x.x/24] # IP address we want for this VM should be set here, for example 192.168.0.120/24
-        routes:
-          - to: default
-            via: x.x.x.x # 192.168.0.1
-        nameservers:
-          addresses:
-            - 1.1.1.1
-            - 8.8.8.8
-          search: []
+  version: 2
+  renderer: networkd
+  ethernets:
+    ens18:
+      dhcp4: no
+      addresses:
+        - 192.168.0.120/24
+      routes:
+        - to: default
+          via: 192.168.0.1
+      nameservers:
+        addresses:
+          - 1.1.1.1
+          - 8.8.8.8
+        search: []
 ```
 
-Remember
-- ```ens18``` is the typical interface name on Debain 13 inside Proxmox
-- update ```addresses```, ```via``` and ```nameservers``` to match your network.
+Before applying the configuration:
 
-Apply the new configuration
+- Confirm that `ens18` is the correct interface name for the VM.
+- Update `addresses`, `via`, and `nameservers` to match your network.
+
+Apply the new configuration:
 
 ```bash
 netplan apply
 ```
 
-If the network doesn’t come up, a quick reboot will fix most issues:
+If the network does not come up, reboot the VM:
 
 ```bash
 reboot
 ```
 
-Now your VM should have a stable IP and you can SSH or access Dockge from anywhere on the LAN.
+The VM should now have a stable LAN IP for SSH and service access.

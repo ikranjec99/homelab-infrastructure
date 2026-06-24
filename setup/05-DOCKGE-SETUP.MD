@@ -1,5 +1,7 @@
 ## Install Dockge
 
+Dockge provides a web interface for managing Docker Compose stacks.
+
 ```bash
 # Create required directories
 mkdir -p /opt/{dockge,stacks}
@@ -12,5 +14,11 @@ curl -sSL https://raw.githubusercontent.com/louislam/dockge/master/compose.yaml 
 cd /opt/dockge
 docker compose up -d
 ```
-Access the GUI at https://<VM_IP>:5001.
-First login uses the default admin / admin credentials – change them immediately.
+
+Access the UI at:
+
+```text
+https://<VM_IP>:5001
+```
+
+Change the default credentials immediately after the first login.
