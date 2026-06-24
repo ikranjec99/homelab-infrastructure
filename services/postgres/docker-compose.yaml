@@ -1,0 +1,24 @@
+# Use postgres/example user/password credentials
+services:
+  db:
+    image: postgres:18.4
+    restart: always
+    shm_size: 512mb
+    environment:
+      PGDATA: /var/lib/postgresql/18/docker
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      PGPORT: ${PGPORT}
+    ports:
+      - 5400:5400
+    networks:
+      - homelab
+    volumes:
+      - pgdata:/var/lib/postgresql
+
+volumes:
+  pgdata:
+
+networks:
+  homelab:
+    driver: bridge
