@@ -1,17 +1,16 @@
-version: "3"
 services:
   vaultwarden:
     image: vaultwarden/server:latest
     container_name: vaultwarden
     restart: unless-stopped
     ports:
-      - 9445:80
+      - "${VAULTWARDEN_HTTP_PORT:-9445}:80"
     volumes:
-      - ./bitwarden:/data:rw
+      - ${VAULTWARDEN_DATA_DIR:-./bitwarden}:/data:rw
     environment:
-      - WEBSOCKET_ENABLED=false
-      - SIGNUPS_ALLOWED=true
-      - DOMAIN=https://vault.ikranjec-homelab.com
+      - WEBSOCKET_ENABLED=${VAULTWARDEN_WEBSOCKET_ENABLED:-false}
+      - SIGNUPS_ALLOWED=${VAULTWARDEN_SIGNUPS_ALLOWED:-false}
+      - DOMAIN=${VAULTWARDEN_DOMAIN:-https://vault.example.com}
     networks:
       - homelab
 

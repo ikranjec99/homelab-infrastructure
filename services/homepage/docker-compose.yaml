@@ -4,12 +4,14 @@ services:
     container_name: homepage
     restart: unless-stopped
     ports:
-      - 3000:3000
+      - "${HOMEPAGE_HTTP_PORT:-3000}:3000"
     volumes:
-      - /path/to/config:/app/config # Make sure your local config directory exists
+      - ${HOMEPAGE_CONFIG_DIR:-./config}:/app/config
       - /var/run/docker.sock:/var/run/docker.sock:ro # (optional) For docker integrations
     environment:
-      HOMEPAGE_ALLOWED_HOSTS: ${HOMEPAGE_ALLOWED_HOSTS} # required, may need port. See gethomepage.dev/installation/#homepage_allowed_hosts
+      HOMEPAGE_ALLOWED_HOSTS: ${HOMEPAGE_ALLOWED_HOSTS:-localhost:3000}
+    networks:
+      - homelab
 
 networks:
   homelab:

@@ -1,7 +1,6 @@
 ## Resize the boot disk
 
-### The script creates a small default partition that can be too small for your workloads.
-
+The VM creation script may create a small default partition. Resize the partition and filesystem before installing services.
 
 ```bash
 # Install cloud-guest-utils (for growpart)

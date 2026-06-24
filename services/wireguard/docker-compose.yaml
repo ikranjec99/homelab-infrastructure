@@ -4,15 +4,15 @@ services:
     restart: unless-stopped
     container_name: wireguard-dashboard
     environment:
-      - tz=Asia/Kolkata  # Change to your time zone if necessary
+      - tz=${TZ:-Europe/Zagreb}
     ports:
-      - 10086:10086/tcp  # Dashboard web UI access
-      - 51820:51820/udp  # WireGuard port
+      - "${WGDASHBOARD_HTTP_PORT:-10086}:10086/tcp"
+      - "${WIREGUARD_UDP_PORT:-51820}:51820/udp"
     volumes:
-      - conf:/etc/wireguard  # Mount configuration folder for WireGuard
-      - data:/data  # Mount data folder
+      - conf:/etc/wireguard
+      - data:/data
     cap_add:
-      - NET_ADMIN  # Allow network administration permissions for WireGuard
+      - NET_ADMIN
 
 volumes:
   conf:
